@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Controle | Netflix</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+
+    <style>
+        body::-webkit-scrollbar {
+            display: none;
+        }
+
+        .accordion-button:not(.collapsed) {
+            color: #fff;
+            background-color: #212529;
+            box-shadow: inset 0 -1px 0 rgb(33 37 41 / 13%);
+        }
+
+        .accordion-button:focus {
+            z-index: 3;
+            border-color: #212529;
+            outline: 0;
+            box-shadow: 0 0 0 0.25rem rgb(33 37 41 / 25%);
+        }
+
+        .accordion-button:not(.collapsed)::after {
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23ffffff'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");
+            transform: rotate(-180deg);
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+
+            <div class="container">
+
+                <a class="navbar-brand" href="/" style="color: red;">ControlFlix</a>
+
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+
+                <div class="collapse navbar-collapse mt-3 mb-2" id="navbarSupportedContent">
+                    <div class="d-flex" style="width: 100%;">
+                        <input class="form-control me-2" type="search" placeholder="Pesquisar por nome..."
+                            aria-label="Search">
+
+                        <a href="/usuarios" class="card-link btn btn-outline-light" role="button">Adicionar</a>
+                    </div>
+                </div>
+
+            </div>
+
+        </nav>
+
+    </header>
+
+    <main>
+        <div class="container">
+
+            <div class="accordion accordion-flush mt-2" id="accordionExample">
+
+
+                <!-- start foreach users -->
+                <% users.forEach(user=> { %>
+
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="<%= user.id %>">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#collapse<%= user.id %>" aria-expanded="true"
+                                aria-controls="collapse<%= user.id %>">
+                                <%= user.name %>
+                            </button>
+                        </h2>
+                        <div id="collapse<%= user.id %>" class="accordion-collapse collapse"
+                            aria-labelledby="<%= user.id %>" data-bs-parent="#accordionExample">
+                            <div class="accordion-body">
+
+                                <div class="card border-0">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Informações do plano.</h5>
+                                        <p class="card-text">
+                                            <strong>Dispositivos: </strong>
+                                            <%= user.devices %>.
+                                                <br>
+                                                <strong>Valor: </strong>R$ <%= user.value %>.
+                                        </p>
+                                    </div>
+                                    <div class="card-body ">
+                                        <a href="/usuarios/<%= user.id %>/editar" class="card-link btn btn-dark"
+                                            role="button">Editar</a>
+                                        <a href="/usuarios/<%= user.id %>/deletar" class="card-link btn btn-dark"
+                                            role="button">Deletar</a>
+                                        <a href="/usuarios/<%= user.id %>/pdf"
+                                            download="<%= user.name.trim().replace(' ', '_') %>"
+                                            class="card-link btn btn-dark" role="button">Boleto</a>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <% }) %>
+                        <!-- end foreach users -->
+
+            </div>
+
+        </div>
+
+    </main>
+
+    <footer>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+            crossorigin="anonymous"></script>
+        <script src="/js/index.js"></script>
+    </footer>
+
+</body>
+
+</html>
