@@ -7,7 +7,7 @@
 <br>
 
 <p align="center">
-  <img alt="controle netflix" src=".github/capa.png" width="80%">
+  <img alt="controle netflix" src=".github/capa.png" width="100%">
 </p>
 
 ## 🚀 Tecnologias
