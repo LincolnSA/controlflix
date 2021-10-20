@@ -19,7 +19,7 @@ const generateDate = () => {
 
     const currentDate = {
         day: date.getDate() > 10 ? date.getDate() : `0${date.getDate()}`,
-        month: months[date.getMonth() + 1],
+        month: months[date.getMonth()],
         year: date.getFullYear()
     }
 
